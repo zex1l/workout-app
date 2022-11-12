@@ -1,11 +1,16 @@
-import Home from "./pages/Home/Home";
-import Layout from "./components/common/Layout";
+import {Routes, Route} from 'react-router-dom'
+
+import Home from "./components/pages/Home/Home";
+import NewWorkout from './components/pages/Home/NewWorkout/NewWorkout';
 
 const App = () => {
     return (
-        <Layout children={Home}>
-            <Home/>
-        </Layout>
+            <Routes>
+                <Route path='/' element={<Home/>}/>
+                <Route path='/new-workout' element={<NewWorkout/>}/>
+                <Route path='*' element={<>Not found</>}/>
+            </Routes>
+            
     );
 };
 
