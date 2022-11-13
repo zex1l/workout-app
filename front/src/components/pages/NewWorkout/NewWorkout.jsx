@@ -23,7 +23,7 @@ const NewWorkout = () => {
     return (
         <>
             <Layout bgImage={newWorkoutImg} h1='CREAT NEW WORKOUT'/>
-            <div className={styles.wrapper}>
+            <div className='wrapper-inner-page'>
                 <form onSubmit={handleSubmit}>
                     <Field 
                         placeholder='Enter name' 
