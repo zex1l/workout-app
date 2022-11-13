@@ -141,3 +141,16 @@ img {
 }
 
 
+.dark-link {
+	display: block;
+	text-align: right;
+	text-decoration: none;
+	width: 100%;
+	margin-bottom: 0.5rem;
+	color: $purple;
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: $accent;
+	}
+}
