@@ -2,6 +2,7 @@ import { useState } from "react";
 import {useNavigate} from 'react-router-dom'
 import { useMutation } from "@tanstack/react-query";
 import { $api } from "../../../api/api";
+import { useAuth } from "../../../hooks/useAuth";
 
 import Layout from "../../common/Layout";
 import Field from "../../ui/Field/Field";
@@ -18,13 +19,24 @@ const Auth = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [type, setType] = useState('auth')
+
+    const {setIsAuth} = useAuth()
     const navigate = useNavigate()
+
+
+    const successLogin = (token) => {
+            localStorage.setItem('token', token)
+
+            setIsAuth(true)
+            setEmail('')
+            setPassword('')
+            navigate('/')
+    }
 
     const {
 		mutate: register,
 		isLoading,
 		error,
-        isError
 	} = useMutation(
 		() =>
 			$api({
@@ -35,12 +47,27 @@ const Auth = () => {
 			}),
 		{
 			onSuccess(data) {
-                localStorage.setItem('token', data.token)
-				console.log(data)
+                successLogin(data.token)
+			},
+		}
+	)
 
-                setEmail('')
-                setPassword('')
-                navigate('/')
+    const {
+		mutate: auth,
+		isLoading: isLoadingAuth,
+		error: errorAuth,
+	} = useMutation(
+		() =>
+			$api({
+				url: '/users/login',
+				type: 'POST',
+				body: { email, password },
+				auth: false,
+			}),
+		{
+			onSuccess(data) {
+                successLogin(data.token)
+                console.log(data)
 			},
 		}
 	)
@@ -49,7 +76,7 @@ const Auth = () => {
         e.preventDefault()
 
         if(type === 'auth') {
-            console.log('Auth')
+            auth()
         }
 
         else {
@@ -63,7 +90,8 @@ const Auth = () => {
             <Layout bgImage={newWorkoutImg} h1='AUTH OR REGISTER'/>
             <div className='wrapper-inner-page'>
                 {error && <Alert type="error" text={error}/>}
-                {isLoading && <Loader/>}
+                {errorAuth && <Alert type="error" text={error}/>}
+                {(isLoading || isLoadingAuth) && <Loader/>}
                 <form onSubmit={handleSubmit}>
                     <Field 
                         placeholder='Enter email' 

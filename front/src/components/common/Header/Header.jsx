@@ -11,6 +11,7 @@ import arrowImage from '../../../images/header/arrow.svg'
 const Header = () => {
 
     const {isAuth} = useAuth() 
+    console.log(isAuth)
     
     const {pathname} = useLocation()
     const navigate = useNavigate()

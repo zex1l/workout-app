@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../../../hooks/useAuth';
 
 import styles from './Hamburger.module.scss'
 import { menu } from './menuBase';
@@ -10,9 +11,11 @@ import hamburgerClose from '../../../../images/header/hamburger-close.svg'
 const Hamburger = () => {
 
     const [show, setShow] = useState(false)
+    const {setIsAuth} = useAuth()
 
     const handleLogout = () => {
-        console.log('logout')
+        localStorage.removeItem('token')
+        setIsAuth(false)
     }
 
     return (
