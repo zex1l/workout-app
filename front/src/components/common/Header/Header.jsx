@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../hooks/useAuth';
 
 import Hamburger from './Hamburger/Hamburger';
 
@@ -9,6 +10,8 @@ import arrowImage from '../../../images/header/arrow.svg'
 
 const Header = () => {
 
+    const {isAuth} = useAuth() 
+    
     const {pathname} = useLocation()
     const navigate = useNavigate()
 
@@ -23,7 +26,7 @@ const Header = () => {
                 )
                 : 
                 (
-                    <button type='button' onClick={() => navigate('/auth')}>
+                    <button type='button' onClick={() => isAuth ? navigate('/profile') : navigate('auth')}>
                         <img src={ userImage} alt="Auth" />
                     </button>
                 )
