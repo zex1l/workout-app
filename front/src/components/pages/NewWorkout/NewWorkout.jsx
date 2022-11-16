@@ -7,7 +7,6 @@ import Field from "../../ui/Field/Field";
 import Button from "../../ui/Button/Button";
 
 
-import styles from './NewWorkout.module.scss'
 
 import newWorkoutImg from '../../../images/pagesImg/newWorkout.jpg'
 

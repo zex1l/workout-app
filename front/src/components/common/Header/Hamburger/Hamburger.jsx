@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../hooks/useAuth';
 
 import styles from './Hamburger.module.scss'
@@ -12,10 +12,12 @@ const Hamburger = () => {
 
     const [show, setShow] = useState(false)
     const {setIsAuth} = useAuth()
+    const navigate = useNavigate()
 
     const handleLogout = () => {
         localStorage.removeItem('token')
         setIsAuth(false)
+        navigate('/auth')
     }
 
     return (

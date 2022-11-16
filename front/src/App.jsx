@@ -1,22 +1,26 @@
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
 import { useState } from 'react';
-import Auth from './components/pages/Auth/Auth';
+import NotFound from './components/pages/404/NotFound';
 
-import Home from "./components/pages/Home/Home";
-import NewWorkout from './components/pages/NewWorkout/NewWorkout';
+
+import { routes } from './routes';
 
 const App = () => {
-    const [isAuth, setIsAuth] = useState(false)
+    const [isAuth, setIsAuth] = useState(!!localStorage.getItem('token'))
 
     return (
         <AuthContext.Provider value={{isAuth, setIsAuth}}>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' element={<Home/>}/>
-                    <Route path='/new-workout' element={<NewWorkout/>}/>
-                    <Route path='/auth' element={<Auth/>}/>
-                    <Route path='*' element={<>Not found</>}/>
+                    {routes.map(route => {
+                        if(route.auth && !isAuth) {
+                            return false
+                        }
+                        return (<Route key={route.path} path={route.path} element={<route.element/>}/>)
+                    })}
+                    
+                    <Route path='*' element={<NotFound/>}/>
                 </Routes>
             </BrowserRouter>
         </AuthContext.Provider>
