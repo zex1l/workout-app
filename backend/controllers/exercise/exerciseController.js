@@ -2,12 +2,12 @@ const asyncHandler = require('express-async-handler')
 const Exercise = require('../../models/exerciseModel')
 
 const createNewExercise = asyncHandler(async (req, res) => {
-    const {name, times, imageId} = req.body
+    const {name, times, imageName} = req.body
 
     const exercise = await Exercise.create({
         name,
         times,
-        imageId
+        imageName
     })
 
     res.json(exercise)
@@ -15,7 +15,7 @@ const createNewExercise = asyncHandler(async (req, res) => {
 
 
 const updateExercise = asyncHandler(async (req, res) => {
-    const {name, times, imageId, exerciseId} = req.body
+    const {name, times, imageName, exerciseId} = req.body
 
     const exercise = await Exercise.findById(exerciseId)
 
@@ -26,7 +26,7 @@ const updateExercise = asyncHandler(async (req, res) => {
 
     exercise.name = name
     exercise.times = times
-    exercise.imageId = imageIndex
+    exercise.imageName = imageName
 
     const updateExercise = await exercise.save()
 

@@ -3,6 +3,7 @@ import cn from 'classnames'
 import styles from './Alert.module.scss'
 
 const Alert = ({type ='success', text}) => {
+
     return (
         <div className={ cn(styles.alert, {
             [styles.error]: type === 'error',
