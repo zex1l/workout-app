@@ -3,6 +3,7 @@ import Auth from './components/pages/Auth/Auth'
 import NewWorkout from './components/pages/NewWorkout/NewWorkout'
 import Profile from './components/pages/Profile/Profile'
 import NewExercise from './components/pages/NewExercise/NewExercise'
+import SingleWorkout from './components/pages/SingleWorkout/SingleWorkout'
 
 export const routes = [
     {
@@ -28,6 +29,11 @@ export const routes = [
     {
         path: '/new-exercise',
         element: NewExercise,
+        auth: true
+    },
+    {
+        path: '/workout/:id',
+        element: SingleWorkout,
         auth: true
     },
 ]

@@ -5,7 +5,7 @@ import Header from './Header/Header';
 
 import styles from './Layout.module.scss'
 
-const Layout = ({children, bgImage,  h1 = ''}) => {
+const Layout = ({children, bgImage,  h1 = '', workout = 0}) => {
     return (
         <div 
             className={cn(styles.wrapper, {
@@ -14,7 +14,10 @@ const Layout = ({children, bgImage,  h1 = ''}) => {
             style={{ backgroundImage: `url(${bgImage})`}}
         >
             <Header />
-            <h1>{h1}</h1>
+            <div>
+                {workout !== 0 && <time className={styles.time}>{workout} min</time> }
+                <h1>{h1}</h1>
+            </div>
             { children && 
                 <div>
                     {children}

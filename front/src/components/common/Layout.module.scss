@@ -16,8 +16,13 @@
     background-position: center;
     background-repeat: no-repeat;
 
+    .time {
+        color: #e5e2e2;
+        font-size: 20px;
+    }
+
     &.otherPage {
-        height: 280px;
+        height: 356px;
         border-radius: 0 0 20px 20px;
         box-shadow: $bx-accent;
     }

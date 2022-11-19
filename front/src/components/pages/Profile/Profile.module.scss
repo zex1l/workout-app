@@ -1,0 +1,27 @@
+@import '../../../sass/variables';
+
+.center {
+    text-align: center;
+    margin: 13px 0 13px;
+    >img {
+        margin-bottom: 10px;
+    }
+}
+
+.before_after {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    >div {
+        width: 48%;
+    }
+
+    img {
+        border-radius: 10px;
+    }
+
+    .heading {
+        margin-bottom: 0.5rem;
+    }
+}
