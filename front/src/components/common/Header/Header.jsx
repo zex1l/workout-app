@@ -21,13 +21,13 @@ const Header = () => {
                 pathname !== '/' ? 
                 (
                     <button onClick={() => navigate(-1)} type='button'>
-                        <img src={arrowImage} alt="Auth" />
+                        <img src={arrowImage} alt="Auth" draggable={false}/>
                     </button>
                 )
                 : 
                 (
                     <button type='button' onClick={() => isAuth ? navigate('/profile') : navigate('auth')}>
-                        <img src={ userImage} alt="Auth" />
+                        <img src={ userImage} alt="Auth" draggable={false}/>
                     </button>
                 )
             }

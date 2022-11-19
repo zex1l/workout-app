@@ -22,7 +22,7 @@ const getWorkout = asyncHandler(async (req, res) => {
 })
 
 const getWorkouts = asyncHandler(async (req, res) => {
-    const workouts = await Workout.find({}).populate('exercise')
+    const workouts = await Workout.find({}).populate('exercises')
 
     res.json(workouts)
 })
