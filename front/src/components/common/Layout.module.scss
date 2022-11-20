@@ -1,0 +1,29 @@
+@import '../../sass/variables';
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    padding: 25px;
+    height: 100%;
+
+    max-width: 560px;
+    width: 100%;
+    margin: 0 auto;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .time {
+        color: #e5e2e2;
+        font-size: 20px;
+    }
+
+    &.otherPage {
+        height: 356px;
+        border-radius: 0 0 20px 20px;
+        box-shadow: $bx-accent;
+    }
+}

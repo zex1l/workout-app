@@ -13,7 +13,7 @@ const updateExerciseLog = asyncHandler(async(req, res) => {
 
     let newTimes = currentLog.times
 
-    if(!timeIndex || !key || !value) {
+    if((!timeIndex && timeIndex !== 0) || !key || (!value && value !== false)) {
         res.status(404)
         throw new Error('You have not specified all fields')
     }    
@@ -32,7 +32,10 @@ const updateExerciseLog = asyncHandler(async(req, res) => {
 const updateCompleteExerciseLog = asyncHandler(async (req, res) => {
     const {logId, completed} = req.body
 
-    let currentLog = await ExerciseLog.findById(logId)
+    let currentLog = await ExerciseLog.findById(logId).populate(
+        'exercise',
+        'workout'
+    )
 
     if(!currentLog) {
         res.status(404)

@@ -1,0 +1,27 @@
+@import '../../../sass/animations';
+@import '../../../sass/variables';
+
+.alert {
+    width: 50%;
+    background-color: #0bdfaa;
+    color: rgb(71, 67, 67);
+    margin: 2rem auto 1rem auto;
+    animation: opacity 0.4s;
+    padding: 10px;
+    border-radius: 10px;
+
+    &.error {
+        background-color: #ff2e62;
+        color: $white;
+    }
+
+    &.warning {
+        background-color: #F75940;
+        color: $white;
+    }
+
+    &.info {
+        background-color: #50c1e9;
+        color: rgb(68, 67, 67);
+    }
+}

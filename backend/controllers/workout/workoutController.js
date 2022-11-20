@@ -21,14 +21,47 @@ const getWorkout = asyncHandler(async (req, res) => {
 
 })
 
+const getWorkouts = asyncHandler(async (req, res) => {
+    const workouts = await Workout.find({}).populate('exercises')
+
+    res.json(workouts)
+})
+
+ const updateWorkout = asyncHandler(async (req, res) => {
+    const {name, exerciseIds, workoutId} = req.body
+
+    const workout = await Workout.findById(workoutId)
+
+    if(!workout) {
+        res.status(404)
+        throw new Error('Workout not found')
+    }
+
+    workout.name = name
+    workout.exercises = exerciseIds
+
+    const updateWorkout = await workout.save()
+
+    res.json(updateWorkout)
+
+})
+
+const deleteWorkout = asyncHandler(async (req, res) => {
+    const { workoutId} = req.body
+
+    const workout = await Workout.findById(workoutId)
+
+    if(!workout) {
+        res.status(404)
+        throw new Error('Workout not found')
+    }
 
 
+    await workout.remove()
 
-/* 
-    [X] - Workouts log models
-    [] - Update exercise & workout
-    [] - Delete exercise & workout
-    [] - Get statistics for profile
- */
+    res.json({message: 'workout was deleted'})
 
-module.exports = {createNewWorkout, getWorkout}
+})
+
+
+module.exports = {createNewWorkout, getWorkout, updateWorkout, deleteWorkout, getWorkouts}

@@ -4,7 +4,7 @@ const express = require('express')
 const protectHandler = require('../middleware/authMiddleware')
 
 // Controllers
-const createNewExercise = require('../controllers/exercise/exerciseController')
+const {createNewExercise, updateExercise, deleteExercise, getExercises} = require('../controllers/exercise/exerciseController')
 const createNewExerciseLog = require('../controllers/exercise/log/createLogController')
 const getExerciseLog = require('../controllers/exercise/log/getLogController')
 const {updateExerciseLog, updateCompleteExerciseLog} = require('../controllers/exercise/log/updateLogController')
@@ -12,7 +12,11 @@ const {updateExerciseLog, updateCompleteExerciseLog} = require('../controllers/e
 
 const router = express.Router()
 
-router.route('/').post(protectHandler, createNewExercise)
+router.route('/')
+        .get(protectHandler, getExercises)
+        .post(protectHandler, createNewExercise)
+        .put(protectHandler, updateExercise)
+        .delete(protectHandler, deleteExercise)
 
 router.route('/log')
     .post(protectHandler, createNewExerciseLog)
