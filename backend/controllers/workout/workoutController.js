@@ -64,11 +64,4 @@ const deleteWorkout = asyncHandler(async (req, res) => {
 })
 
 
-/* 
-    [X] - Workouts log models
-    [] - Update exercise & workout
-    [] - Delete exercise & workout
-    [] - Get statistics for profile
- */
-
 module.exports = {createNewWorkout, getWorkout, updateWorkout, deleteWorkout, getWorkouts}

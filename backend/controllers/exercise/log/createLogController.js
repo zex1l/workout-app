@@ -3,11 +3,9 @@ const ExerciseLog = require('../../../models/exerciseLogModel')
 
 // create exercise log or take previos
 const createNewExerciseLog = asyncHandler(async (req, res) => {
-    const {exerciseId, times} = req.body
+    const {exerciseId, times, workoutLog} = req.body
 
     let timesArray = []
-
-
     
     for(let i = 0; i < times; i++) {
         timesArray.push({
@@ -16,10 +14,10 @@ const createNewExerciseLog = asyncHandler(async (req, res) => {
         })
     }
 
-
     const exerciseLog = await ExerciseLog.create({
         user: req.user._id,
         exercise: exerciseId,
+        workoutLog,
         times: timesArray
     })
 

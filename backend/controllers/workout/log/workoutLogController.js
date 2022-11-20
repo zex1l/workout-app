@@ -4,52 +4,51 @@ const Workout = require('../../../models/workoutModel')
 const ExerciseLog = require('../../../models/exerciseLogModel')
 
 const createNewWorkoutLog = asyncHandler(async (req, res) => {
-    const {workoutId} = req.body
+    const { workoutId } = req.body
 
-    const user = req.user._id
+	const user = req.user._id
 
-    const workout = await Workout.findById(workoutId).populate('exercise')
+	const workout = await Workout.findById(workoutId).populate('exercises')
 
-    if(workout) {
-        const workoutLog = await WorkoutLog.create({
-            user,
-            workout: workoutId
-        })
+	if (workout) {
+		const workoutLog = await WorkoutLog.create({
+			user,
+			workout: workoutId,
+		})
 
-        const logs = workout.exercises.map(ex => {
-            let timesArray = []
+		const logs = workout.exercises.map(ex => {
+			let timesArray = []
 
-            for(let i = 0; i<ex.times; i++) {
-                timesArray.push({
-                    weight: 0,
-                    repeat: 0
-                })
-            }
+			for (let i = 0; i < ex.times; i++) {
+				timesArray.push({
+					weight: 0,
+					repeat: 0,
+				})
+			}
 
-            return {
-                user,
-                exercises: ex._id,
-                times: timesArray,
-                workoutLog: workout._id
-            }
-        })
+			return {
+				user,
+				exercise: ex._id,
+				times: timesArray,
+				workoutLog: workoutLog._id,
+			}
+		})
 
-        const createdExLogs = await ExerciseLog.insertMany(logs)
+		const createdExLogs = await ExerciseLog.insertMany(logs)
 
-        const exLogIds = createdExLogs.map(log => log._id)
+		const exLogIds = createdExLogs.map(log => log._id)
 
-        const foundWorkoutLog = await WorkoutLog.findById(workoutLog._id)
+		const foundWorkoutLog = await WorkoutLog.findById(workoutLog._id)
 
-        foundWorkoutLog.exerciseLog = exLogIds
+		foundWorkoutLog.exerciseLogs = exLogIds
 
-        const updateWorkoutLog = await foundWorkoutLog.save()
+		const updatedWorkoutLog = await foundWorkoutLog.save()
 
-        res.json(updateWorkoutLog)
-    }
-    else {
-        res.status(404)
-        throw new Error('Workout not found')
-    }
+		res.json(updatedWorkoutLog)
+	} else {
+		res.status(404)
+		throw new Error('Workout not found')
+	}
 
 
     res.json(workoutLog)

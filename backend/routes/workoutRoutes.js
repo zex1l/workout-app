@@ -17,7 +17,7 @@ router.route('/')
             .delete(protectHandler, deleteWorkout)
 
 router.route('/:id').get(protectHandler, getWorkout)
-router.route('/log.completed').put(protectHandler, updateCompletedWorkoutLog)
+router.route('/log/completed').put(protectHandler, updateCompletedWorkoutLog)
 router.route('/log').post(protectHandler, createNewWorkoutLog)
 router.route('/log/:id').get(protectHandler, getWorkoutLog)
 

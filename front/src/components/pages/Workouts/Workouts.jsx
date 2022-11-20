@@ -1,5 +1,5 @@
-import {useQuery} from '@tanstack/react-query'
-
+import {useQuery, useMutation} from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 import Layout from '../../common/Layout'
 
 import styles from './Workouts.module.scss'
@@ -9,6 +9,7 @@ import Loader from '../../ui/Loader/Loader';
 import { Link } from 'react-router-dom';
 
 const Workouts = () => {
+    const navigate = useNavigate()
 
     const {data, isSuccess} = useQuery(
         ['get all workouts'],
@@ -17,6 +18,19 @@ const Workouts = () => {
         }),
         {
             refetchOnWindowFocus: false
+        }
+    )
+
+    const {mutate, isSuccess: isSuccesMutate} = useMutation(
+        ({workoutId}) => $api({
+            url: '/workouts/log',
+            type: 'POST',
+            body: {workoutId}
+        }),
+        {
+            onSuccess(data) {
+                navigate(`/workout/${data._id}`)
+            }
         }
     )
     return (
@@ -28,12 +42,19 @@ const Workouts = () => {
                 <div className={styles.items}>
                     {isSuccess ? data.map(workout => (
                         <div key={workout._id} className={styles.item}>
-                            <Link to={`/workout/${workout._id}`}>{workout.name}</Link>
+                            <button
+                                aria-label='Create new workout'
+                                onClick={() => mutate({workoutId: workout._id})}
+                            >
+                            <span>{workout.name}</span>
+                            </button>
                         </div>
                     ))
                         : <Loader/>
                     }
+                    <Link className='btn'  to='/'>Back Home</Link>   
                 </div>
+                
             </div>
         </>
     );

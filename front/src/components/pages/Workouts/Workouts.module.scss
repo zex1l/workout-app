@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-
+    
     .item {
         background-color: $purple;
         width: 100%;
@@ -14,6 +14,13 @@
         transition: background-color 0.3s ease;
         margin-top: 20px;
 
+        >button {
+            cursor: pointer;
+            color: $white;
+            border: none;
+            background-color: transparent;
+        }
+
         &:first-child {
             margin-top: 0;
         }
@@ -21,10 +28,20 @@
         &:hover {
             background-color: $dark-purple;
         }
-
-        >a {
-            text-decoration: none;
-            color: $white;
-        }
+        
     }
+    >a {
+        background-color: rgb(92, 32, 65);
+        padding: 10px 20px;
+        border-radius: 10px;
+        margin-top: 60px;
+        text-decoration: none;
+        color: $white;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: $purple;
+        }
+    }    
 }
+

@@ -26,7 +26,7 @@ const Hamburger = () => {
                 type='button'
                 onClick={() => setShow(!show)}
             >
-                <img src={show ? hamburgerClose: hamburgerImage} alt="Menu" height={24} draggable={false}/>
+                <img src={show ? hamburgerClose: hamburgerImage} alt="Menu" height={29} width={29} draggable={false}/>
             </button> 
             <nav className={`${styles.menu} ${show ? styles.show : ''}`}>
                 <ul>

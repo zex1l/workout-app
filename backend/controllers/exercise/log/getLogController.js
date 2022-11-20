@@ -4,7 +4,7 @@ const ExerciseLog = require('../../../models/exerciseLogModel')
 
 // Get exercise log
 const getExerciseLog = asyncHandler(async (req, res) => {
-    let exerciseLog = await ExerciseLog.findById(req.params.id).populate('exercise', 'name imageId').lean()
+    let exerciseLog = await ExerciseLog.findById(req.params.id).populate('exercise', 'name imageName').lean()
 
     if(!exerciseLog){
         res.status(404)

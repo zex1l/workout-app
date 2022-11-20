@@ -6,7 +6,9 @@
     justify-content: center;
     flex-direction: column;
 
-    >div {
+    > button {
+        outline: none;
+        border: none;
         cursor: pointer;
         background-color: $purple;
         width: 100%;
@@ -15,17 +17,36 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        text-decoration: none;
+        color: $white;
 
+        
         &.item {
             margin-top: 10px;
-            > a {
-                text-decoration: none;
-                color: $white;
+            &.completed {
+                background-color: $dark-purple;
             }
         }
 
         &.finished {
             background-color: $dark-purple;
         }
+
+
     }
+
+    >a {
+        background-color: rgb(92, 32, 65);
+        padding: 10px 20px;
+        border-radius: 10px;
+        margin-top: 60px;
+        text-decoration: none;
+        color: $white;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: $purple;
+        }
+    } 
 }
+
